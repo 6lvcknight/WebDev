@@ -83,6 +83,7 @@
             </button>
           </div>
         </form>
+
         
         <div class="register-footer">
           <p>
@@ -95,22 +96,25 @@
   </template>
   
   <script setup>
-  import { ref, computed, onMounted, watch } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { ref, computed, watch } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { register } from '../api.js'
   
-  const router = useRouter();
-  const firstName = ref('');
-  const lastName = ref('');
-  const email = ref('');
-  const password = ref('');
-  const confirmPassword = ref('');
-  const agreeToTerms = ref(false);
-  const passwordMismatch = ref(false);
-  const formValid = ref(false);
+  const router = useRouter()
+  
+  const firstName = ref('')
+  const lastName = ref('')
+  const email = ref('')
+  const password = ref('')
+  const confirmPassword = ref('')
+  const agreeToTerms = ref(false)
+  const passwordMismatch = ref(false)
+  const formValid = ref(false)
+  const errorMsg = ref('')
   
   const validatePassword = () => {
-    passwordMismatch.value = password.value && confirmPassword.value && password.value !== confirmPassword.value;
-  };
+    passwordMismatch.value = password.value && confirmPassword.value && password.value !== confirmPassword.value
+  }
   
   const validateForm = () => {
     formValid.value = firstName.value &&
@@ -119,30 +123,38 @@
       password.value &&
       confirmPassword.value &&
       !passwordMismatch.value &&
-      agreeToTerms.value;
-  };
+      agreeToTerms.value
+  }
   
-  // Watch for changes in form fields
   watch([firstName, lastName, email, password, confirmPassword, agreeToTerms], () => {
-    validatePassword();
-    validateForm();
-  });
+    validatePassword()
+    validateForm()
+  })
   
-  const handleRegister = () => {
-    if (!formValid.value) return;
+  const handleRegister = async () => {
+    if (!formValid.value) return
   
-    // Here you would typically call your registration API
-    console.log('Registration with:', {
-      firstName: firstName.value,
-      lastName: lastName.value,
+    const userData = {
+      username: `${firstName.value} ${lastName.value}`,
       email: email.value,
       password: password.value
-    });
+    }
   
-    // For demo purposes, we'll just redirect to the login page
-    router.push('/login');
-  };
+    try {
+      const res = await register(userData)
+  
+      if (res.message === 'User registered successfully') {
+        router.push('/login')
+      } else {
+        errorMsg.value = res.message || 'Registration failed'
+      }
+    } catch (err) {
+      console.error(err)
+      errorMsg.value = 'Something went wrong. Please try again.'
+    }
+  }
   </script>
+  
   
   <style scoped>
   .register-container {

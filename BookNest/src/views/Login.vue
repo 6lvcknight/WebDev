@@ -58,23 +58,38 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { login } from '../api.js'  // 🔥 make sure this path is correct
   
-  const email = ref('');
-  const password = ref('');
-  const rememberMe = ref(false);
+  const email = ref('')
+  const password = ref('')
+  const rememberMe = ref(false)
+  const router = useRouter()
+  const errorMsg = ref('')
   
-  const router = useRouter();
+  const handleLogin = async () => {
+    try {
+      const res = await login({ email: email.value, password: password.value })
   
-  const handleLogin = () => {
-    // Here you would typically call your authentication API
-    console.log('Login attempt with:', { email: email.value, password: password.value, rememberMe: rememberMe.value });
-    
-    // For demo purposes, we'll just redirect to the home page
-    router.push('/home');
-  };
+      if (res.token) {
+        localStorage.setItem('token', res.token)
+  
+        // Optional: store user info
+        localStorage.setItem('user', JSON.stringify(res.user))
+  
+        // Redirect after login
+        router.push('/')
+      } else {
+        errorMsg.value = res.message || 'Login failed'
+      }
+    } catch (err) {
+      errorMsg.value = 'Something went wrong. Please try again.'
+      console.error(err)
+    }
+  }
   </script>
+  
   
   <style scoped>
   .login-container {
