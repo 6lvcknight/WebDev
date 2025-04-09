@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a29831-ae1e-4c8a-8a19-e9b83d9dcb65" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BookNest/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookNest/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookNest/src/views/AdminDashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/BookNest/src/views/AdminDashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookNest/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/BookNest/src/views/Home.vue" afterDir="false" />
-    </list>
+    <list default="true" id="b3a29831-ae1e-4c8a-8a19-e9b83d9dcb65" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +63,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744217570580</updated>
-      <workItem from="1744217572013" duration="8937000" />
+      <workItem from="1744217572013" duration="9284000" />
     </task>
     <servers />
   </component>
