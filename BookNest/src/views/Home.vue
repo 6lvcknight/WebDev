@@ -14,11 +14,9 @@
             </div>
           </div>
           <div class="navbar-right">
-            <div class="user-menu">
-              <button class="user-button">
-                <span class="sr-only">Open user menu</span>
-                <span class="users-icon"></span>
-              </button>
+            <div v-if="username" class="flex items-center gap-4">
+              <span class="username-label">Logged in as {{ username }}</span>
+              <button @click="handleLogout" class="text-sm text-red-600 underline hover:text-red-800">Logout</button>
             </div>
           </div>
         </div>
@@ -136,8 +134,29 @@
     </div>
   </template>
   
+    
+
   <script setup>
-  import { ref } from 'vue';
+    import { onMounted, ref } from 'vue'
+    import { useRouter } from 'vue-router'
+    import { getUser, logout } from '../composables/useAuth'
+
+    const router = useRouter()
+    const username = ref('')
+
+    onMounted(() => {
+    const user = getUser()
+    if (user) {
+      username.value = user.username
+    }
+  })
+
+  const handleLogout = () => {
+    logout()
+    username.value = ''
+    router.push('/login')
+}
+
   
   // Sample data for featured books
   const featuredBooks = ref([
@@ -214,6 +233,8 @@
   ]);
   </script>
   
+
+
   <style scoped>
   .home-container {
     min-height: 100vh;
@@ -328,6 +349,9 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+  .username-label {
+    margin-right: 1rem;
   }
   
   /* Hero Section */

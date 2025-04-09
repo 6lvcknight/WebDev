@@ -8,19 +8,17 @@
               <h1>BookNest</h1>
             </div>
             <div class="navbar-links">
-              <router-link to="/home" class="navbar-link">Home</router-link>
+              <router-link to="/" class="navbar-link">Home</router-link>
               <router-link to="/browse" class="navbar-link active">Browse</router-link>
               <router-link to="/my-books" class="navbar-link">My Books</router-link>
             </div>
           </div>
           <div class="navbar-right">
-            <div class="user-menu">
-              <button class="user-button">
-                <span class="sr-only">Open user menu</span>
-                <img src="https://via.placeholder.com/150" alt="User profile" />
-              </button>
+              <div v-if="username" class="flex items-center gap-4">
+                <span class="username-label">Logged in as {{ username }}</span>
+                <button @click="handleLogout" class="navbar-link logout-link">Logout</button>
+              </div>
             </div>
-          </div>
         </div>
       </nav>
   
@@ -202,6 +200,25 @@
   
   <script setup>
   import { ref, computed, onMounted } from 'vue';
+  import { useRouter } from 'vue-router'
+  import { getUser, logout } from '../composables/useAuth'
+
+  const router = useRouter()
+  const username = ref('')
+
+  onMounted(() => {
+    const user = getUser()
+    if (user) {
+      username.value = user.username
+    }
+  })
+
+  const handleLogout = () => {
+    logout()
+    username.value = ''
+    router.push('/login')
+  }
+
   
   // Filters state
   const filters = ref({
@@ -522,6 +539,9 @@
     border-radius: 9999px;
     border: 1px solid #e5e7eb;
   }
+  .username-label {
+    margin-right: 1rem;
+  }
   
   .sr-only {
     position: absolute;
@@ -581,6 +601,15 @@
       gap: 2rem;
     }
   }
+  .logout-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
   
   /* Filters Sidebar */
   .filters-sidebar {

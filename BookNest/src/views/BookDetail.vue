@@ -8,7 +8,7 @@
               <h1>BookNest</h1>
             </div>
             <div class="navbar-links">
-              <router-link to="/home" class="navbar-link">Home</router-link>
+              <router-link to="/" class="navbar-link">Home</router-link>
               <router-link to="/browse" class="navbar-link">Browse</router-link>
               <router-link to="/my-books" class="navbar-link">My Books</router-link>
             </div>
