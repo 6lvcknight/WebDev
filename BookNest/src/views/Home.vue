@@ -8,7 +8,7 @@
               <h1>BookNest</h1>
             </div>
             <div class="navbar-links">
-              <router-link to="/home" class="navbar-link active">Home</router-link>
+              <router-link to="/" class="navbar-link active">Home</router-link>
               <router-link to="/browse" class="navbar-link">Browse</router-link>
               <router-link to="/my-books" class="navbar-link">My Books</router-link>
             </div>
@@ -17,7 +17,7 @@
             <div class="user-menu">
               <button class="user-button">
                 <span class="sr-only">Open user menu</span>
-                <img src="https://via.placeholder.com/150" alt="User profile" />
+                <span class="users-icon"></span>
               </button>
             </div>
           </div>
@@ -283,6 +283,18 @@
   .navbar-right {
     display: flex;
     align-items: center;
+  }
+
+  .users-icon {
+    background-color: #fbbf24;
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'/%3E%3C/svg%3E");
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    border-radius: 9999px;
   }
   
   .user-button {
