@@ -4,11 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a29831-ae1e-4c8a-8a19-e9b83d9dcb65" name="Changes" comment="" />
+    <list default="true" id="b3a29831-ae1e-4c8a-8a19-e9b83d9dcb65" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BookNest/src/views/D3.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookNest/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookNest/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookNest/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookNest/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookNest/src/views/AdminDashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/BookNest/src/views/AdminDashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/.bin/nodemon" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/.bin/nodemon" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,6 +39,9 @@
     &quot;accountId&quot;: &quot;8dbe4cab-eebe-4579-bdb7-d1f700aeb515&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -63,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744217570580</updated>
-      <workItem from="1744217572013" duration="9284000" />
+      <workItem from="1744217572013" duration="15318000" />
     </task>
     <servers />
   </component>

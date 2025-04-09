@@ -131,6 +131,26 @@
               </div>
             </div>
 
+            <!-- D3 Charts Section -->
+            <div class="charts-wrapper">
+              <div class="charts-row">
+                <div class="chart-block">
+                  <h2>Book Ratings Bar Chart</h2>
+                  <div id="ratings-bar-chart"></div>
+                </div>
+
+                <div class="chart-block">
+                  <h2>Book Distribution Pie Chart</h2>
+                  <div id="book-distribution-pie"></div>
+                </div>
+
+                <div class="chart-block">
+                  <h2>Monthly Borrowed Books</h2>
+                  <div id="borrowed-line-chart"></div>
+                </div>
+              </div>
+            </div>
+
             <!-- Recent Activity and Books Management -->
             <div class="dashboard-grid">
               <!-- Recent Activity -->
@@ -390,6 +410,137 @@ const recentUsers = ref([
     status: 'Inactive'
   }
 ]);
+import { onMounted } from 'vue';
+import * as d3 from 'd3';
+
+onMounted(() => {
+  drawBarChart();
+  drawPieChart();
+  drawLineChart();
+});
+
+function drawBarChart() {
+  const data = [
+    { book: 'Book A', rating: 4.2 },
+    { book: 'Book B', rating: 3.8 },
+    { book: 'Book C', rating: 4.5 },
+    { book: 'Book D', rating: 2.7 },
+    { book: 'Book E', rating: 4.9 },
+  ];
+
+  const width = 300;
+  const height = 200;
+  const svg = d3.select('#ratings-bar-chart')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  const x = d3.scaleBand().range([0, width]).domain(data.map(d => d.book)).padding(0.2);
+  const y = d3.scaleLinear().range([height, 0]).domain([0, 5]);
+
+  svg.append('g')
+    .attr('transform', `translate(0, ${height})`)
+    .call(d3.axisBottom(x));
+
+  svg.append('g')
+    .call(d3.axisLeft(y));
+
+  svg.selectAll('bars')
+    .data(data)
+    .enter()
+    .append('rect')
+    .attr('x', d => x(d.book))
+    .attr('y', d => y(d.rating))
+    .attr('width', x.bandwidth())
+    .attr('height', d => height - y(d.rating))
+    .attr('fill', '#d97706');
+  svg.selectAll('text.bar-label')
+    .data(data)
+    .enter()
+    .append('text')
+    .attr('class', 'bar-label')
+    .attr('x', d => x(d.book) + x.bandwidth() / 2)
+    .attr('y', d => y(d.rating) - 5)
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#111827')
+    .attr('font-size', '12px')
+    .text(d => d.rating);
+}
+
+function drawPieChart() {
+  const data = { Available: 2547 - 428, Borrowed: 428 };
+  const width = 300;
+  const height = 200;
+  const radius = Math.min(width, height) / 2;
+
+  const svg = d3.select('#book-distribution-pie')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .append('g')
+    .attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+  const color = d3.scaleOrdinal().range(['#10b981', '#ef4444']);
+  const pie = d3.pie().value(d => d[1]);
+  const data_ready = pie(Object.entries(data));
+
+  svg.selectAll('path')
+    .data(data_ready)
+    .enter()
+    .append('path')
+    .attr('d', d3.arc().innerRadius(0).outerRadius(radius))
+    .attr('fill', d => color(d.data[0]));
+  svg.selectAll('text.pie-label')
+    .data(data_ready)
+    .enter()
+    .append('text')
+    .attr('class', 'pie-label')
+    .text(d => `${d.data[0]} (${d.data[1]})`)
+    .attr('transform', d => {
+      const pos = d3.arc().innerRadius(0).outerRadius(radius).centroid(d);
+      return `translate(${pos[0]}, ${pos[1]})`;
+    })
+    .style('text-anchor', 'middle')
+    .style('font-size', '12px')
+    .style('fill', '#111827');
+}
+
+function drawLineChart() {
+  const data = [
+    { month: 'Jan', count: 30 },
+    { month: 'Feb', count: 50 },
+    { month: 'Mar', count: 40 },
+  ];
+
+  const width = 300;
+  const height = 200;
+
+  const svg = d3.select('#borrowed-line-chart')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  const x = d3.scalePoint().domain(data.map(d => d.month)).range([0, width - 40]);
+  const y = d3.scaleLinear().domain([0, d3.max(data, d => d.count)]).range([height - 20, 0]);
+
+  svg.append('g')
+    .attr('transform', `translate(20, ${height - 20})`)
+    .call(d3.axisBottom(x));
+
+  svg.append('g')
+    .attr('transform', 'translate(20, 0)')
+    .call(d3.axisLeft(y));
+
+  svg.append('path')
+    .datum(data)
+    .attr('fill', 'none')
+    .attr('stroke', '#3b82f6')
+    .attr('stroke-width', 2)
+    .attr('d', d3.line()
+      .x(d => x(d.month) + 20)
+      .y(d => y(d.count))
+    );
+}
 </script>
 
 <style scoped>
@@ -1030,4 +1181,25 @@ const recentUsers = ref([
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'/%3E%3C/svg%3E");
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'/%3E%3C/svg%3E");
 }
+  .charts-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .charts-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .charts-row > .chart-block {
+    flex: 1;
+    min-width: 300px;
+  }
 </style>
+  .chart-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
