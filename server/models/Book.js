@@ -11,6 +11,7 @@ const BookSchema = new mongoose.Schema({
     availableCopies: { type: Number, required: true },
     totalCopies: { type: Number, required: true },
     rating: { type: Number, default: 0 },
+    coverImage: { type: String },
     reviews: [{
         userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         reviewText: { type: String },

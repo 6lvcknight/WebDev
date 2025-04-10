@@ -232,7 +232,8 @@ const insertBooks = async () => {
                 description: 'Description for The Midnight Library.',
                 availableCopies: 0,
                 totalCopies: 5,
-                rating: 4.5
+                rating: 4.5,
+                coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'Klara and the Sun',
@@ -244,7 +245,8 @@ const insertBooks = async () => {
                 description: 'Description for Klara and the Sun.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 4
+                rating: 4,
+                coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'Project Hail Mary',
@@ -256,7 +258,8 @@ const insertBooks = async () => {
                 description: 'Description for Project Hail Mary.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 5
+                rating: 5,
+                coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'The Four Winds',
@@ -268,7 +271,8 @@ const insertBooks = async () => {
                 description: 'Description for The Four Winds.',
                 availableCopies: 0,
                 totalCopies: 5,
-                rating: 4
+                rating: 4,
+                coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'The Invisible Life of Addie LaRue',
@@ -280,7 +284,8 @@ const insertBooks = async () => {
                 description: 'Description for The Invisible Life of Addie LaRue.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 4.5
+                rating: 4.5,
+                coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'The Vanishing Half',
@@ -292,7 +297,8 @@ const insertBooks = async () => {
                 description: 'Description for The Vanishing Half.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 4
+                rating: 4,
+                coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'Hamnet',
@@ -304,7 +310,8 @@ const insertBooks = async () => {
                 description: 'Description for Hamnet.',
                 availableCopies: 0,
                 totalCopies: 5,
-                rating: 3.5
+                rating: 3.5,
+                coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'The Guest List',
@@ -316,7 +323,8 @@ const insertBooks = async () => {
                 description: 'Description for The Guest List.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 4
+                rating: 4,
+                coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'Educated',
@@ -328,7 +336,8 @@ const insertBooks = async () => {
                 description: 'Description for Educated.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 5
+                rating: 5,
+                coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'Sapiens',
@@ -340,7 +349,8 @@ const insertBooks = async () => {
                 description: 'Description for Sapiens.',
                 availableCopies: 0,
                 totalCopies: 5,
-                rating: 4.5
+                rating: 4.5,
+                coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'Atomic Habits',
@@ -352,7 +362,8 @@ const insertBooks = async () => {
                 description: 'Description for Atomic Habits.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 4
+                rating: 4,
+                coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             },
             {
                 title: 'The Silent Patient',
@@ -364,7 +375,8 @@ const insertBooks = async () => {
                 description: 'Description for The Silent Patient.',
                 availableCopies: 3,
                 totalCopies: 5,
-                rating: 4.5
+                rating: 4.5,
+                coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
             }
         ])
 
