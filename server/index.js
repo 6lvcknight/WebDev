@@ -8,7 +8,7 @@ import libraryRoutes from './routes/library.js'
 dotenv.config()
 
 const app = express()                      // <-- Make sure this comes first
-const PORT = process.env.PORT || 3000
+
 
 connectDB()
 
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
 console.log("Connecting to:", process.env.MONGO_URI)
 
-
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
