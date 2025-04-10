@@ -341,7 +341,6 @@
       }
 
       const response = await axios.get(`http://localhost:3000/api/library/books/${id}`);
-
       book.value = {
         ...response.data,
         title: response.data.title || 'Untitled Book',

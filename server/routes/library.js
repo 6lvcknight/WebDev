@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { Book } from '../models/Book.js';
+import { Book, Author, Genre } from '../models/Book.js';
 const router = express.Router();
 
 
@@ -49,7 +49,11 @@ router.get('/books/:id', async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: 'Invalid book ID format' });
         }
-        const bookItem = await Book.findById(id);
+        const bookItem = await Book.findById(id)
+            .populate('author')
+            .populate('publisher') 
+            .populate('genres')
+            .populate('reviews.userId');
         if (!bookItem) return res.status(404).json({ message: 'Book not found' });
         res.status(200).json(bookItem);
     } catch (error) {
@@ -161,5 +165,53 @@ router.delete('/books/:id/reviews/:reviewId', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+// Get author by id
+router.get('/authors/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Check if ID is valid
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid author ID format' });
+        }
+        const author = await Author.findById(id);
+        if (!author) return res.status(404).json({ message: 'Author not found' });
+        res.status(200).json(author);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+
+// Get publisher by id
+router.get('/publishers/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Check if ID is valid
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid publisher ID format' });
+        }
+        const publisher = await Publisher.findById(id);
+        if (!publisher) return res.status(404).json({ message: 'Publisher not found' });
+        res.status(200).json(publisher);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+
+// get genre by id
+router.get('/genres/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Check if ID is valid
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid genre ID format' });
+        }
+        const genre = await Genre.findById(id);
+        if (!genre) return res.status(404).json({ message: 'Genre not found' });
+        res.status(200).json(genre);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
 
 export default router
