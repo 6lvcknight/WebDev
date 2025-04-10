@@ -8,25 +8,25 @@
         </div>
         <div class="sidebar-content">
           <nav class="sidebar-nav">
-            <a href="#" class="nav-item active">
-              <span class="nav-icon dashboard-icon"></span>
-              Dashboard
-            </a>
-            <a href="#" class="nav-item">
-              <span class="nav-icon books-icon"></span>
-              Books
-            </a>
-            <a href="#" class="nav-item">
-              <span class="nav-icon users-icon"></span>
-              Users
-            </a>
-            <a href="#" class="nav-item">
-              <span class="nav-icon borrowing-icon"></span>
-              Borrowing
-            </a>
-            <a href="#" class="nav-item">
+            <router-link to="/admin" class="nav-item active">
               <span class="nav-icon settings-icon"></span>
-              Settings
+              <span>Dashboard</span>
+            </router-link>
+            <router-link to="/" class="nav-item">
+              <span class="nav-icon home-icon"></span>
+              <span>Home</span>
+            </router-link>
+            <router-link to="/browse" class="nav-item">
+              <span class="nav-icon browse-icon"></span>
+              <span>Browse</span>
+            </router-link>
+            <router-link to="/my-books" class="nav-item">
+              <span class="nav-icon books-icon"></span>
+              <span>Books</span>
+            </router-link>
+            <a @click="handleLogout" class="nav-item" style="cursor: pointer;">
+              <span class="logout-icon"></span>
+              <span>Log Out</span>
             </a>
           </nav>
         </div>
@@ -285,6 +285,15 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router'
+import { logout } from '../composables/useAuth'
+
+const router = useRouter()
+
+function handleLogout() {
+  logout()
+  router.push('/login')
+}
 
 // Dashboard statistics
 const stats = ref({
@@ -711,8 +720,9 @@ function drawLineChart() {
 
 .logout-icon {
   display: inline-block;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.75rem;
   background-color: #fbbf24;
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'/%3E%3C/svg%3E");
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'/%3E%3C/svg%3E");
@@ -1196,6 +1206,15 @@ function drawLineChart() {
   .charts-row > .chart-block {
     flex: 1;
     min-width: 300px;
+  }
+  .home-icon {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'/%3E%3C/svg%3E");
+  }
+
+  .browse-icon {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 4a1 1 0 011-1h3.586a1 1 0 01.707.293l1.414 1.414A1 1 0 0010.414 5H20a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V4z'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 4a1 1 0 011-1h3.586a1 1 0 01.707.293l1.414 1.414A1 1 0 0010.414 5H20a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V4z'/%3E%3C/svg%3E");
   }
 </style>
   .chart-block {
