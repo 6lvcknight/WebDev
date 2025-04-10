@@ -134,7 +134,7 @@
                   <img :src="book.coverImage" :alt="book.title" class="book-cover">
                   <div class="book-info">
                     <h3 class="book-title">{{ book.title }}</h3>
-                    <p class="book-author">{{ book.author }}</p>
+                    <p class="book-author">{{ book.author.name }}</p>
                     <div class="book-rating">
                       <div class="stars">
                         <svg v-for="i in 5" :key="i" class="star" :class="i <= book.rating ? 'filled' : ''" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -144,8 +144,8 @@
                       <span class="rating-text">{{ book.rating }}/5</span>
                     </div>
                     <div class="book-categories">
-                      <span v-for="(category, index) in book.categories" :key="index" class="book-category">
-                        {{ category }}
+                      <span v-for="(genre, index) in book.genres" :key="index" class="book-category">
+                        {{ genre.name }}
                       </span>
                     </div>
                     <div class="book-availability" :class="book.isAvailable ? 'available' : 'unavailable'">
@@ -199,150 +199,44 @@
   </template>
   
   <script setup>
-  import { ref, computed, onMounted } from 'vue';
+  import { ref, computed, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
   import { getUser, logout } from '../composables/useAuth'
-
+  
   const router = useRouter()
   const username = ref('')
-
+  
   onMounted(() => {
     const user = getUser()
     if (user) {
       username.value = user.username
     }
   })
-
+  
   const handleLogout = () => {
     logout()
     username.value = ''
     router.push('/login')
   }
-
   
-  // Filters state
   const filters = ref({
     categories: [],
     ratings: [],
     availability: []
-  });
+  })
   
-  const searchQuery = ref('');
-  const sortOption = ref('relevance');
-  const currentPage = ref(1);
-  const booksPerPage = 8;
+  const searchQuery = ref('')
+  const sortOption = ref('relevance')
+  const currentPage = ref(1)
+  const booksPerPage = 8
+  const allBooks = ref([])
   
-  // Sample books data
-  const allBooks = ref([
-    {
-      id: 1,
-      title: 'The Midnight Library',
-      author: 'Matt Haig',
-      coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4.5,
-      categories: ['Fiction', 'Fantasy'],
-      isAvailable: false
-    },
-    {
-      id: 2,
-      title: 'Klara and the Sun',
-      author: 'Kazuo Ishiguro',
-      coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4,
-      categories: ['Fiction', 'Science Fiction'],
-      isAvailable: true
-    },
-    {
-      id: 3,
-      title: 'Project Hail Mary',
-      author: 'Andy Weir',
-      coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 5,
-      categories: ['Science Fiction', 'Adventure'],
-      isAvailable: true
-    },
-    {
-      id: 4,
-      title: 'The Four Winds',
-      author: 'Kristin Hannah',
-      coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4,
-      categories: ['Historical Fiction', 'Drama'],
-      isAvailable: false
-    },
-    {
-      id: 5,
-      title: 'The Invisible Life of Addie LaRue',
-      author: 'V.E. Schwab',
-      coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4.5,
-      categories: ['Fantasy', 'Historical Fiction'],
-      isAvailable: true
-    },
-    {
-      id: 6,
-      title: 'The Vanishing Half',
-      author: 'Brit Bennett',
-      coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4,
-      categories: ['Fiction', 'Historical Fiction'],
-      isAvailable: true
-    },
-    {
-      id: 7,
-      title: 'Hamnet',
-      author: 'Maggie O\'Farrell',
-      coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 3.5,
-      categories: ['Historical Fiction', 'Drama'],
-      isAvailable: false
-    },
-    {
-      id: 8,
-      title: 'The Guest List',
-      author: 'Lucy Foley',
-      coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4,
-      categories: ['Mystery', 'Thriller'],
-      isAvailable: true
-    },
-    {
-      id: 9,
-      title: 'Educated',
-      author: 'Tara Westover',
-      coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 5,
-      categories: ['Biography', 'Memoir'],
-      isAvailable: true
-    },
-    {
-      id: 10,
-      title: 'Sapiens',
-      author: 'Yuval Noah Harari',
-      coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4.5,
-      categories: ['Non-Fiction', 'History', 'Science'],
-      isAvailable: false
-    },
-    {
-      id: 11,
-      title: 'Atomic Habits',
-      author: 'James Clear',
-      coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4,
-      categories: ['Non-Fiction', 'Self-Help'],
-      isAvailable: true
-    },
-    {
-      id: 12,
-      title: 'The Silent Patient',
-      author: 'Alex Michaelides',
-      coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4.5,
-      categories: ['Thriller', 'Mystery'],
-      isAvailable: true
-    }
-  ]);
+  // Fetching book data from API
+  onMounted(async () => {
+      const response = await fetch('http://localhost:3000/api/library')
+      const data = await response.json()
+      allBooks.value = data
+  })
   
   // Filtered and sorted books
   const filteredBooks = computed(() => {
@@ -353,15 +247,15 @@
       const query = searchQuery.value.toLowerCase();
       result = result.filter(book => 
         book.title.toLowerCase().includes(query) || 
-        book.author.toLowerCase().includes(query)
+        book.author?.name?.toLowerCase().includes(query)
       );
     }
     
     // Apply category filters
     if (filters.value.categories.length > 0) {
       result = result.filter(book => 
-        book.categories.some(category => 
-          filters.value.categories.includes(category.toLowerCase())
+        book.genres.some(genre => 
+          filters.value.categories.includes(genre.name.toLowerCase())
         )
       );
     }
