@@ -50,7 +50,7 @@
         <div class="login-footer">
           <p>
             Don't have an account?
-            <a to="/register" class="link">Register now</a>
+            <router-link to="/register" class="link">Register now</router-link>
           </p>
         </div>
       </div>
