@@ -35,12 +35,31 @@ router.get('/books/search', async (req, res) => {
 // Get books recently added
 router.get('/books/recent', async (req, res) => {
     try {
-        const books = await Book.find().sort({ createdAt: -1 }).limit(10);
+        const books = await Book.find().sort({ createdAt: -1 }).limit(4)
+            .populate('author')
+            .populate('publisher') 
+            .populate('genres');
         res.status(200).json(books);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
+// Get featured books
+router.get('/books/featured', async (req, res) => {
+    try {
+        const books = await Book.find()
+            .sort({ reviewsCount: -1 })
+            .limit(4)
+            .populate('author')
+            .populate('publisher') 
+            .populate('genres');
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // Get a single book by ID
 router.get('/books/:id', async (req, res) => {
     try {
@@ -60,6 +79,8 @@ router.get('/books/:id', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+
 
 // POST REQUESTS
 // Post a new book
