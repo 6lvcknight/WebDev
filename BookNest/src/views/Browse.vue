@@ -151,7 +151,7 @@
                     <div class="book-availability" :class="book.isAvailable ? 'available' : 'unavailable'">
                       {{ book.isAvailable ? 'Available' : 'Borrowed' }}
                     </div>
-                    <router-link :to="`/book/${book.id}`" class="book-link">
+                    <router-link :to="`/book/${book._id}`" class="book-link">
                       View details
                     </router-link>
                   </div>
@@ -233,9 +233,27 @@
   
   // Fetching book data from API
   onMounted(async () => {
+    try {
       const response = await fetch('http://localhost:3000/api/library')
       const data = await response.json()
-      allBooks.value = data
+      
+      allBooks.value = data.map(book => ({
+        _id: book._id, // Keep the MongoDB _id for routing
+        id: book._id,  // For backward compatibility if needed
+        title: book.title || 'Untitled',
+        author: book.author || { name: 'Unknown Author' },
+        publisher: book.publisher || { name: 'Unknown Publisher' },
+        coverImage: book.coverImage || 'https://via.placeholder.com/300x450?text=No+Cover',
+        rating: book.reviews?.length > 0 
+          ? (book.reviews.reduce((sum, review) => sum + review.rating, 0) / book.reviews.length) 
+          : 0,
+        isAvailable: (book.availableCopies || 0) > 0,
+        genres: book.genres || [],
+        description: book.description || 'No description available',
+      }));
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    }
   })
   
   // Filtered and sorted books
