@@ -11,6 +11,7 @@
               <router-link to="/" class="navbar-link">Home</router-link>
               <router-link to="/browse" class="navbar-link active">Browse</router-link>
               <router-link to="/my-books" class="navbar-link">My Books</router-link>
+              <router-link to="/admin" class="navbar-link">Admin</router-link>
             </div>
           </div>
           <div class="navbar-right">
