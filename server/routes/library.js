@@ -8,7 +8,10 @@ const router = express.Router();
 // Get all books
 router.get('/', async (req, res) => {
     try {
-        const books = await Book.find();
+        const books = await Book.find()
+            .populate('author', 'name')
+            .populate('genres', 'name')
+            .populate('publisher', 'name'); 
         res.status(200).json(books);
     } catch (error) {
         res.status(500).json({ message: error.message });
