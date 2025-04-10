@@ -1,4 +1,5 @@
-Mankirat Mann (100878345) - Worked on AdminDashboard, Graphs (D3.js), Home, Navbar, Tweaked isses all around
+Mankirat Mann (100878345) - Worked on AdminDashboard, Graphs (D3.js), Home, Navbar, Tweaked isses all around.
 Folu Aderibigbe (100791511) - built the server api routes and the models. built the api calls in the frontend. created the script for the data and a test script to confirm the api routes were working as expected.
-Mohsin Qureshi (100875639) - Implemented the "My Books" page with borrowed books and wishlist functionality, and fixed some UI consistency
-Ayaan Yousaf (100864679) - Connected Browse page to API to fetch book data, wrote scripts for populating database, improved consistency and fixed some bugs in the frontend. 
+Mohsin Qureshi (100875639) - Implemented the "My Books" page with borrowed books and wishlist functionality, and fixed some UI consistency.
+Ayaan Yousaf (100864679) - Connected Browse page to API to fetch book data, wrote scripts for populating database, improved consistency and fixed some bugs in the frontend.
+Bisayo Awude (100871551) - Worked on the footers page (About, Blog, Contact, Privacy and Terms).
