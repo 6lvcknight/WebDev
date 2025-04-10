@@ -9,29 +9,15 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const books = await Book.find()
-            .populate('author', 'name')
-            .populate('genres', 'name')
-            .populate('publisher', 'name'); 
+            .populate('author')
+            .populate('publisher')
+            .populate('genres');
         res.status(200).json(books);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
-// Get a single book by ID
-router.get('/books/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        // Check if ID is valid
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: 'Invalid book ID format' });
-        }
-        const bookItem = await Book.findById(id);
-        if (!bookItem) return res.status(404).json({ message: 'Book not found' });
-        res.status(200).json(bookItem);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+
 // Get books by search query
 router.get('/books/search', async (req, res) => {
     const { title, author, genre } = req.query;
@@ -55,6 +41,21 @@ router.get('/books/recent', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+// Get a single book by ID
+router.get('/books/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Check if ID is valid
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid book ID format' });
+        }
+        const bookItem = await Book.findById(id);
+        if (!bookItem) return res.status(404).json({ message: 'Book not found' });
+        res.status(200).json(bookItem);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 // POST REQUESTS
 // Post a new book
@@ -73,7 +74,15 @@ router.post('/books/:id/reviews', async (req, res) => {
     try {
         const bookItem = await Book.findById(req.params.id);
         if (!bookItem) return res.status(404).json({ message: 'Book not found' });
-        bookItem.reviews.push({ userId, reviewText, rating });
+        bookItem.reviews.push({ 
+            userId, 
+            title, 
+            content,
+            rating 
+        });
+        
+        bookItem.reviewsCount = bookItem.reviews.length;
+
         await bookItem.save();
         res.status(201).json(bookItem);
     } catch (error) {
