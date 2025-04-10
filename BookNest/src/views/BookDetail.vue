@@ -290,10 +290,34 @@
   <script setup>
   import { ref, onMounted } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
+  import axios from 'axios';
   
   const route = useRoute();
   const router = useRouter();
   
+  // Book data
+  const book = ref({
+    title: '',
+    coverImage: '',
+    author: '',
+    publisher: '',
+    isbn: '',
+    pages: 0,
+    language: '',
+    description: '',
+    publicationDate: '',
+    isAvailable: false,
+    rating: 0,
+    reviewsCount: 0,
+    categories: [],
+    reviews: [],
+    ratingDistribution: {
+      1: 0, 2: 0, 3: 0, 4: 0, 5: 0
+    }
+  });
+  const loading = ref(true);
+  const error = ref(null);
+
   // Review form state
   const showReviewForm = ref(false);
   const reviewRating = ref(0);
@@ -303,65 +327,67 @@
   const toggleReviewForm = () => {
     showReviewForm.value = !showReviewForm.value;
   };
-  
-  // Sample book data
-  const book = ref({
-    id: 1,
-    title: 'The Midnight Library',
-    author: 'Matt Haig',
-    coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    rating: 4.5,
-    reviewsCount: 428,
-    categories: ['Fiction', 'Fantasy', 'Contemporary'],
-    isAvailable: true,
-    publisher: 'Viking',
-    publicationDate: 'August 13, 2020',
-    isbn: '9780525559474',
-    pages: 304,
-    language: 'English',
-    description: `<p>Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived. To see how things would be if you had made other choices... Would you have done anything different, if you had the chance to undo your regrets?</p>
-    <p>A dazzling novel about all the choices that go into a life well lived, from the internationally bestselling author of Reasons to Stay Alive and How To Stop Time.</p>
-    <p>Somewhere out beyond the edge of the universe there is a library that contains an infinite number of books, each one the story of another reality. One tells the story of your life as it is, along with another book for the other life you could have lived if you had made a different choice at any point in your life. While we all wonder how our lives might have been, what if you had the chance to go to the library and see for yourself? Would any of these other lives truly be better?</p>`,
-    ratingDistribution: {
-      5: 250,
-      4: 120,
-      3: 40,
-      2: 10,
-      1: 8
-    },
-    reviews: [
-      {
-        id: 1,
-        userName: 'Sarah Johnson',
-        userAvatar: 'https://randomuser.me/api/portraits/women/12.jpg',
-        date: 'January 15, 2023',
-        rating: 5,
-        title: 'A life-changing read',
-        content: 'This book completely changed my perspective on life and the choices we make. The concept is fascinating and the execution is flawless. I couldn\'t put it down and finished it in one sitting.',
-        helpful: 42
-      },
-      {
-        id: 2,
-        userName: 'Michael Chen',
-        userAvatar: 'https://randomuser.me/api/portraits/men/22.jpg',
-        date: 'December 3, 2022',
-        rating: 4,
-        title: 'Thought-provoking and beautiful',
-        content: 'Matt Haig has a way with words that makes even the most complex philosophical concepts accessible. The story is both heartwarming and heartbreaking at the same time. My only criticism is that some parts felt a bit rushed.',
-        helpful: 28
-      },
-      {
-        id: 3,
-        userName: 'Emma Wilson',
-        userAvatar: 'https://randomuser.me/api/portraits/women/32.jpg',
-        date: 'November 18, 2022',
-        rating: 5,
-        title: 'One of my favorites of the year',
-        content: 'I don\'t often give 5-star reviews, but this book deserves it. The premise is unique, the characters are well-developed, and the writing is beautiful. It\'s one of those books that stays with you long after you\'ve finished reading.',
-        helpful: 35
+
+  // Fetch book data
+  const fetchBookData = async (id) => {
+    try {
+      loading.value = true;
+
+      // Validate the ID format before making the API call
+      if (!/^[0-9a-fA-F]{24}$/.test(id)) {
+        error.value = 'Invalid book ID format';
+        loading.value = false;
+        return console.error(error.value);
       }
-    ]
-  });
+
+      const response = await axios.get(`http://localhost:3000/api/library/books/${id}`);
+
+      book.value = {
+        ...response.data,
+        title: response.data.title || 'Untitled Book',
+        author: response.data.author?.name || 'Unknown Author',
+        publisher: response.data.publisher?.name || 'Unknown Publisher',
+        isAvailable: (response.data.availableCopies || 0) > 0,
+        categories: response.data.genres?.map(genre => genre.name || 'Uncategorized') || [],
+        ratingDistribution: {
+          1: 0, 2: 0, 3: 0, 4: 0, 5: 0
+        },
+        publicationDate: response.data.publishedDate ? 
+          new Date(response.data.publishedDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) : 'Unknown Date',
+        reviewsCount: response.data.reviews?.length || 0,
+        rating: response.data.reviewsCount > 0 ? 
+          (response.data.reviews?.reduce((sum, review) => sum + review.rating, 0) / response.data.reviews.length).toFixed(1) : 
+          '0.0',
+        reviews: (response.data.reviews || []).map(review => ({
+          ...review,
+          userName: review.userId?.username || 'Anonymous User',
+          userAvatar: review.userId?.profileImage || 'https://randomuser.me/api/portraits/lego/1.jpg',
+          date: new Date(review.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+        }))
+      };
+
+      // Calculate rating distribution
+      response.data.reviews.forEach(review => {
+        if (review.rating >=1 && review.rating <=5){
+          book.value.ratingDistribution[review.rating]++;
+        }
+      });
+
+      loading.value = false;
+    } catch (err) {
+      error.value = err.response?.data?.message || 'Failed to fetch book';
+      loading.value = false;
+      console.error('Error fetching book:', err);
+    }
+  }
   
   // Sample similar books
   const similarBooks = ref([
@@ -464,6 +490,16 @@
   
     alert('Review submitted successfully!');
   };
+
+  // Fetch book data on component mount
+  onMounted(() => {
+    const bookId = route.params.id;
+    if (bookId) {
+      fetchBookData(bookId);
+    } else {
+      error.value = 'No book ID provided';
+    }
+  });
   </script>
   
   <style scoped>
