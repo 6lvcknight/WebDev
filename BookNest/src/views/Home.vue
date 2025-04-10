@@ -11,10 +11,12 @@
               <router-link to="/" class="navbar-link active">Home</router-link>
               <router-link to="/browse" class="navbar-link">Browse</router-link>
               <router-link to="/my-books" class="navbar-link">My Books</router-link>
+              <router-link to="/admin" class="navbar-link">Admin</router-link>
             </div>
           </div>
           <div class="navbar-right">
             <div v-if="username" class="flex items-center gap-4">
+              <router-link to="/admin" class="navbar-link">Admin</router-link>
               <span class="username-label">Logged in as {{ username }}</span>
               <button @click="handleLogout" class="navbar-link logout-link">Logout</button>
             </div>
