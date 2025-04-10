@@ -102,22 +102,18 @@
   
       <!-- Call to Action -->
       <div class="cta-section">
-        <div class="cta-container">
+        <div class="cta-container centered-cta">
           <h2 class="cta-title">
             <span>Ready to start reading?</span>
-            <span class="cta-subtitle">Join BookNest today.</span>
           </h2>
-          <div class="cta-buttons">
-            <router-link to="/register" class="btn-secondary">
-              Sign up for free
-            </router-link>
+          <div class="cta-buttons single-button">
             <router-link to="/browse" class="btn-primary">
               Browse books
             </router-link>
           </div>
         </div>
       </div>
-  
+
       <!-- Footer -->
       <footer class="footer">
         <div class="footer-container">
@@ -133,8 +129,8 @@
       </footer>
     </div>
   </template>
-  
-    
+
+
 
   <script setup>
     import { onMounted, ref } from 'vue'
@@ -159,7 +155,7 @@
     router.push('/login')
 }
 
-  
+
   // Sample data for featured books
   const featuredBooks = ref([
     {
@@ -191,7 +187,7 @@
       rating: 4
     }
   ]);
-  
+
   // Sample data for categories
   const categories = ref([
     { id: 1, name: 'Fiction', count: 1243, icon: 'BookIcon' },
@@ -201,7 +197,7 @@
     { id: 5, name: 'Biography', count: 286, icon: 'UserIcon' },
     { id: 6, name: 'Fantasy', count: 512, icon: 'SparklesIcon' }
   ]);
-  
+
   // Sample data for recent books
   const recentBooks = ref([
     {
@@ -234,7 +230,7 @@
     }
   ]);
   </script>
-  
+
 
 
   <style scoped>
@@ -242,13 +238,13 @@
     min-height: 100vh;
     background-color: #fff8e1;
   }
-  
+
   /* Navbar Styles */
   .navbar {
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
-  
+
   .navbar-container {
     max-width: 1280px;
     margin: 0 auto;
@@ -258,30 +254,30 @@
     align-items: center;
     height: 4rem;
   }
-  
+
   .navbar-left {
     display: flex;
     align-items: center;
   }
-  
+
   .navbar-logo h1 {
     font-size: 1.5rem;
     font-weight: bold;
     color: #b45309;
   }
-  
+
   .navbar-links {
     display: none;
     margin-left: 1.5rem;
   }
-  
+
   @media (min-width: 640px) {
     .navbar-links {
       display: flex;
       gap: 1.25rem;
     }
   }
-  
+
   .navbar-link {
     display: inline-flex;
     align-items: center;
@@ -292,17 +288,17 @@
     color: #6b7280;
     text-decoration: none;
   }
-  
+
   .navbar-link:hover {
     color: #4b5563;
     border-bottom-color: #d1d5db;
   }
-  
+
   .navbar-link.active {
     color: #111827;
     border-bottom-color: #d97706;
   }
-  
+
   .navbar-right {
     display: flex;
     align-items: center;
@@ -328,7 +324,7 @@
     -webkit-mask-size: cover;
     border-radius: 9999px;
   }
-  
+
   .user-button {
     background-color: white;
     border-radius: 9999px;
@@ -337,19 +333,19 @@
     border: none;
     cursor: pointer;
   }
-  
+
   .user-button:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.5);
   }
-  
+
   .user-button img {
     height: 2rem;
     width: 2rem;
     border-radius: 9999px;
     border: 1px solid #e5e7eb;
   }
-  
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -364,7 +360,7 @@
   .username-label {
     margin-right: 1rem;
   }
-  
+
   /* Hero Section */
   .hero-section {
     position: relative;
@@ -372,7 +368,7 @@
     color: white;
     padding: 6rem 1rem;
   }
-  
+
   .hero-section::before {
     content: '';
     position: absolute;
@@ -385,50 +381,50 @@
     background-position: center;
     opacity: 0.3;
   }
-  
+
   .hero-content {
     position: relative;
     max-width: 1280px;
     margin: 0 auto;
     z-index: 1;
   }
-  
+
   .hero-content h1 {
     font-size: 2.25rem;
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 1.5rem;
   }
-  
+
   @media (min-width: 640px) {
     .hero-content h1 {
       font-size: 3rem;
     }
   }
-  
+
   @media (min-width: 1024px) {
     .hero-content h1 {
       font-size: 3.75rem;
     }
   }
-  
+
   .hero-content p {
     font-size: 1.125rem;
     color: #fef3c7;
     max-width: 48rem;
     margin-bottom: 2.5rem;
   }
-  
+
   .search-container {
     max-width: 36rem;
   }
-  
+
   .search-box {
     display: flex;
     width: 100%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
-  
+
   .search-box input {
     flex-grow: 1;
     padding: 0.75rem 1rem;
@@ -437,11 +433,11 @@
     border-bottom-left-radius: 0.375rem;
     font-size: 0.875rem;
   }
-  
+
   .search-box input:focus {
     outline: none;
   }
-  
+
   .search-button {
     display: inline-flex;
     align-items: center;
@@ -455,59 +451,59 @@
     border-bottom-right-radius: 0.375rem;
     cursor: pointer;
   }
-  
+
   .search-button:hover {
     background-color: #b45309;
   }
-  
+
   /* Section Styles */
   .section {
     padding: 3rem 1rem;
   }
-  
+
   @media (min-width: 768px) {
     .section {
       padding: 3rem 1.5rem;
     }
   }
-  
+
   @media (min-width: 1024px) {
     .section {
       padding: 4rem 2rem;
     }
   }
-  
+
   .section-container {
     max-width: 1280px;
     margin: 0 auto;
   }
-  
+
   .section-title {
     font-size: 1.875rem;
     font-weight: bold;
     color: #111827;
     margin-bottom: 1.5rem;
   }
-  
+
   /* Books Grid */
   .books-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
   }
-  
+
   @media (min-width: 640px) {
     .books-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  
+
   @media (min-width: 1024px) {
     .books-grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
-  
+
   .book-card {
     background-color: white;
     border-radius: 0.5rem;
@@ -515,66 +511,66 @@
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   .book-card:hover {
     transform: translateY(-0.25rem);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .book-cover {
     width: 100%;
     height: 16rem;
     object-fit: cover;
   }
-  
+
   .book-info {
     padding: 1rem;
   }
-  
+
   .book-title {
     font-size: 1.125rem;
     font-weight: 600;
     color: #111827;
     margin-bottom: 0.25rem;
   }
-  
+
   .book-author {
     font-size: 0.875rem;
     color: #6b7280;
   }
-  
+
   .book-rating {
     display: flex;
     align-items: center;
     margin-top: 0.5rem;
   }
-  
+
   .stars {
     display: flex;
   }
-  
+
   .star {
     height: 1.25rem;
     width: 1.25rem;
     color: #d1d5db;
   }
-  
+
   .star.filled {
     color: #fbbf24;
   }
-  
+
   .rating-text {
     font-size: 0.875rem;
     color: #6b7280;
     margin-left: 0.25rem;
   }
-  
+
   .book-date {
     font-size: 0.75rem;
     color: #6b7280;
     margin-top: 0.5rem;
   }
-  
+
   .book-link {
     display: inline-block;
     margin-top: 0.75rem;
@@ -583,34 +579,34 @@
     color: #d97706;
     text-decoration: none;
   }
-  
+
   .book-link:hover {
     color: #b45309;
   }
-  
+
   /* Categories Section */
   .categories-section {
     background-color: #f3f4f6;
   }
-  
+
   .categories-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   @media (min-width: 768px) {
     .categories-grid {
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  
+
   @media (min-width: 1024px) {
     .categories-grid {
       grid-template-columns: repeat(6, 1fr);
     }
   }
-  
+
   .category-card {
     background-color: white;
     padding: 1rem;
@@ -619,11 +615,11 @@
     text-align: center;
     transition: box-shadow 0.3s ease;
   }
-  
+
   .category-card:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .category-icon {
     width: 3rem;
     height: 3rem;
@@ -634,37 +630,37 @@
     justify-content: center;
     margin: 0 auto 0.75rem;
   }
-  
+
   .category-icon svg {
     height: 1.5rem;
     width: 1.5rem;
     color: #d97706;
   }
-  
+
   .category-name {
     font-size: 0.875rem;
     font-weight: 500;
     color: #111827;
   }
-  
+
   .category-count {
     font-size: 0.75rem;
     color: #6b7280;
     margin-top: 0.25rem;
   }
-  
+
   /* CTA Section */
   .cta-section {
     background-color: #b45309;
     padding: 3rem 1rem;
   }
-  
+
   @media (min-width: 1024px) {
     .cta-section {
       padding: 4rem 2rem;
     }
   }
-  
+
   .cta-container {
     max-width: 1280px;
     margin: 0 auto;
@@ -672,14 +668,14 @@
     flex-direction: column;
     align-items: center;
   }
-  
+
   @media (min-width: 1024px) {
     .cta-container {
       flex-direction: row;
       justify-content: space-between;
     }
   }
-  
+
   .cta-title {
     font-size: 1.875rem;
     font-weight: 800;
@@ -688,36 +684,36 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   @media (min-width: 640px) {
     .cta-title {
       font-size: 2.25rem;
     }
   }
-  
+
   .cta-subtitle {
     color: #fef3c7;
   }
-  
+
   .cta-buttons {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     margin-top: 2rem;
   }
-  
+
   @media (min-width: 640px) {
     .cta-buttons {
       flex-direction: row;
     }
   }
-  
+
   @media (min-width: 1024px) {
     .cta-buttons {
       margin-top: 0;
     }
   }
-  
+
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -731,11 +727,11 @@
     text-decoration: none;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
-  
+
   .btn-primary:hover {
     background-color: #92400e;
   }
-  
+
   .btn-secondary {
     display: inline-flex;
     align-items: center;
@@ -749,23 +745,23 @@
     text-decoration: none;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
-  
+
   .btn-secondary:hover {
     background-color: #f9fafb;
   }
-  
+
   /* Footer */
   .footer {
     background-color: white;
     padding: 3rem 1rem;
   }
-  
+
   .footer-container {
     max-width: 1280px;
     margin: 0 auto;
     overflow: hidden;
   }
-  
+
   .footer-nav {
     display: flex;
     flex-wrap: wrap;
@@ -773,22 +769,38 @@
     gap: 1.25rem;
     margin: -0.5rem;
   }
-  
+
   .footer-link {
     padding: 0.5rem;
     font-size: 1rem;
     color: #6b7280;
     text-decoration: none;
   }
-  
+
   .footer-link:hover {
     color: #111827;
   }
-  
+
   .copyright {
     margin-top: 2rem;
     text-align: center;
     font-size: 0.875rem;
     color: #6b7280;
+  }
+  .cta-buttons.single-button {
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .centered-cta {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .centered-cta .cta-title {
+    align-items: center;
   }
   </style>
