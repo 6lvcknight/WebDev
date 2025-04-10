@@ -20,10 +20,10 @@ const routes = [
   { path: '/', component: Home },
   { path: '/home', component: Home },
   { path: '/browse', component: Browse },
-  { path: '/book/:id', component: BookDetail },
+  { path: '/book/:id', component: BookDetail, props: true },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
-  { path: '/admin', component: AdminDashboard },
+  { path: '/admin', component: AdminDashboard, meta: { requiresAdmin: true } },
   { path: '/my-books', component: MyBooksView },
   // Footer routes:
   { path: '/about', component: About },
