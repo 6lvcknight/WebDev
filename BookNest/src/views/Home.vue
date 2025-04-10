@@ -16,7 +16,6 @@
           </div>
           <div class="navbar-right">
             <div v-if="username" class="flex items-center gap-4">
-              <router-link to="/admin" class="navbar-link">Admin</router-link>
               <span class="username-label">Logged in as {{ username }}</span>
               <button @click="handleLogout" class="navbar-link logout-link">Logout</button>
             </div>

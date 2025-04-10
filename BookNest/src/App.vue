@@ -1,12 +1,12 @@
 <template>
   <div>
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/browse">Browse</router-link> |
-      <router-link to="/my-books">My Books</router-link> | <!-- Add new link -->
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
-      <router-link to="/admin">Admin</router-link>
+      <router-link to="/"></router-link>
+      <router-link to="/browse"></router-link>
+      <router-link to="/my-books"></router-link>
+      <router-link to="/login"></router-link>
+      <router-link to="/register"></router-link>
+      <router-link to="/admin"></router-link>
     </nav>
     <hr />
     <router-view />
@@ -16,7 +16,7 @@
 <style>
 nav {
   padding: 1rem;
-  background-color: #f5f5f5;
+  background-color: white;
 }
 router-link {
   margin-right: 1rem;

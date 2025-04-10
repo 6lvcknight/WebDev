@@ -1,0 +1,1 @@
+Mankirat Mann (100878345) - Worked on AdminDashboard, Graphs (D3.js), Home, Navbar, Tweaked isses all around
