@@ -43,14 +43,14 @@
           </div>
           
           <div class="form-actions">
-            <router-link type="submit" class="btn-primary">Sign in</router-link>
+            <button type="submit" class="btn-primary">Sign in</button>
           </div>
         </form>
         
         <div class="login-footer">
           <p>
             Don't have an account?
-            <router-link to="/register" class="link">Register now</router-link>
+            <a to="/register" class="link">Register now</a>
           </p>
         </div>
       </div>
