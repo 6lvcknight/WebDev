@@ -43,7 +43,7 @@
           </div>
           
           <div class="form-actions">
-            <button type="submit" class="btn-primary">Sign in</button>
+            <router-link type="submit" class="btn-primary">Sign in</router-link>
           </div>
         </form>
         
@@ -79,7 +79,7 @@
         localStorage.setItem('user', JSON.stringify(res.user))
   
         // Redirect after login
-        router.push('/')
+        router.push('/home')
       } else {
         errorMsg.value = res.message || 'Login failed'
       }
