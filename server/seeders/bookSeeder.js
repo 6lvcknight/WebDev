@@ -113,11 +113,11 @@ const seedDatabase = async () => {
       {
         title: 'Harry Potter and the Philosopher\'s Stone',
         author: createdAuthors[0]._id,
-        coverImage: 'https://images.unsplash.com/photo-1606311698062-20df019767e9?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1551269901-5c5e14c25df7?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[0]._id,
         isbn: '9780747532743',
         publishedDate: new Date('1997-06-26'),
-        genres: [createdGenres[0]._id], // Fantasy
+        genres: [createdGenres[0]._id], 
         description: 'The first novel in the Harry Potter series follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh birthday.',
         availableCopies: 50,
         language: 'English',
@@ -170,11 +170,11 @@ const seedDatabase = async () => {
       {
         title: 'A Game of Thrones',
         author: createdAuthors[1]._id,
-        coverImage: 'https://images.unsplash.com/photo-1600189261867-30e5ffe7b8da?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1602748113791-19ffc2be8f46?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[1]._id,
         isbn: '9780553103540',
         publishedDate: new Date('1996-08-01'),
-        genres: [createdGenres[0]._id, createdGenres[5]._id], // Fantasy, Historical Fiction
+        genres: [createdGenres[0]._id, createdGenres[5]._id], 
         description: 'The first novel in A Song of Ice and Fire, the story of political and sexual intrigue between several families vying for the Iron Throne.',
         availableCopies: 35,
         language: 'English',
@@ -213,11 +213,11 @@ const seedDatabase = async () => {
       {
         title: 'The Shining',
         author: createdAuthors[2]._id,
-        coverImage: 'https://images.unsplash.com/photo-1598618443855-232ee0f819f6?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1606562297910-eb71cd6693ab?q=80&w=1885&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[2]._id,
         isbn: '9780385121675',
         publishedDate: new Date('1977-01-28'),
-        genres: [createdGenres[4]._id], // Thriller
+        genres: [createdGenres[4]._id],
         description: 'A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence.',
         availableCopies: 20,
         language: 'English',
@@ -243,11 +243,11 @@ const seedDatabase = async () => {
       {
         title: 'Murder on the Orient Express',
         author: createdAuthors[3]._id,
-        coverImage: 'https://images.unsplash.com/photo-1587876931567-564ce588bfbd?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1629677712305-4967def312c5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TXVyZGVyJTIwb24lMjB0aGUlMjBPcmllbnQlMjBFeHByZXNzfGVufDB8fDB8fHww',
         publisher: createdPublishers[0]._id,
         isbn: '9780007119318',
         publishedDate: new Date('1934-01-01'),
-        genres: [createdGenres[2]._id], // Mystery
+        genres: [createdGenres[2]._id], 
         description: 'Famous detective Hercule Poirot investigates a murder that occurred on the train he is traveling on.',
         availableCopies: 15,
         language: 'English',
@@ -264,11 +264,11 @@ const seedDatabase = async () => {
       {
         title: 'It Ends with Us',
         author: createdAuthors[4]._id,
-        coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1509231173988-35aaf90d45a8?q=80&w=1915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[3]._id,
         isbn: '9781501110368',
         publishedDate: new Date('2016-08-02'),
-        genres: [createdGenres[3]._id], // Romance
+        genres: [createdGenres[3]._id],
         description: 'A heartbreaking story about love, overcoming trauma, and strength.',
         availableCopies: 45,
         language: 'English',
@@ -307,12 +307,12 @@ const seedDatabase = async () => {
       },
       {
         title: 'The Handmaid\'s Tale',
-        author: createdAuthors[5]._id, // Margaret Atwood
-        coverImage: 'https://images.unsplash.com/photo-1601933470928-c49ed2594a34?q=80&w=400',
-        publisher: createdPublishers[0]._id, // Penguin Random House
+        author: createdAuthors[5]._id, 
+        coverImage: 'https://images.unsplash.com/photo-1733255024953-fa05c5d0d76c?q=80&w=1867&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        publisher: createdPublishers[0]._id, 
         isbn: '9780385490818',
         publishedDate: new Date('1985-08-17'),
-        genres: [createdGenres[1]._id, createdGenres[7]._id], // Sci-Fi, Self-Help
+        genres: [createdGenres[1]._id, createdGenres[7]._id], 
         description: 'Dystopian novel set in a totalitarian theocracy where women are subjugated.',
         availableCopies: 40,
         language: 'English',
@@ -351,12 +351,12 @@ const seedDatabase = async () => {
       },
       {
         title: 'Coraline',
-        author: createdAuthors[6]._id, // Neil Gaiman
-        coverImage: 'https://images.unsplash.com/photo-1578924482837-b1be7f2db178?q=80&w=400',
-        publisher: createdPublishers[1]._id, // HarperCollins
+        author: createdAuthors[6]._id, 
+        coverImage: 'https://images.unsplash.com/photo-1545200866-b13684ff687f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        publisher: createdPublishers[1]._id,
         isbn: '9780061139376',
         publishedDate: new Date('2002-08-04'),
-        genres: [createdGenres[9]._id], // Horror
+        genres: [createdGenres[9]._id],
         description: 'A young girl discovers a parallel world that hides sinister secrets.',
         availableCopies: 30,
         language: 'English',
@@ -381,12 +381,12 @@ const seedDatabase = async () => {
       },
       {
         title: 'I Know Why the Caged Bird Sings',
-        author: createdAuthors[7]._id, // Maya Angelou
-        coverImage: 'https://images.unsplash.com/photo-1576106361084-8f2d6c93f7b0?q=80&w=400',
-        publisher: createdPublishers[2]._id, // Simon & Schuster
+        author: createdAuthors[7]._id,
+        coverImage: 'https://images.unsplash.com/photo-1628428988999-714933015bf2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8SSUyMEtub3clMjBXaHklMjB0aGUlMjBDYWdlZCUyMEJpcmQlMjBTaW5nc3xlbnwwfHwwfHx8MA%3D%3D',
+        publisher: createdPublishers[2]._id,
         isbn: '9780345514400',
         publishedDate: new Date('1969-04-21'),
-        genres: [createdGenres[6]._id], // Biography
+        genres: [createdGenres[6]._id], 
         description: 'Autobiography that illustrates how strength of character and a love of literature can help overcome racism and trauma.',
         availableCopies: 25,
         language: 'English',
@@ -405,7 +405,7 @@ const seedDatabase = async () => {
       {
         title: 'The Lightning Thief',
         author: createdAuthors[8]._id, // Rick Riordan
-        coverImage: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1621497591119-6062a8a5b8f0?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[4]._id, // Scholastic
         isbn: '9780786838653',
         publishedDate: new Date('2005-06-28'),
@@ -435,7 +435,7 @@ const seedDatabase = async () => {
       {
         title: 'The Testaments',
         author: createdAuthors[5]._id, // Margaret Atwood
-        coverImage: 'https://images.unsplash.com/photo-1588776814546-0f863b7e3938?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1711613160718-73ab967c1757?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[5]._id, // Bloomsbury
         isbn: '9780385543781',
         publishedDate: new Date('2019-09-10'),
@@ -458,7 +458,7 @@ const seedDatabase = async () => {
       {
         title: 'American Gods',
         author: createdAuthors[6]._id, // Neil Gaiman
-        coverImage: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=400',
+        coverImage: 'https://plus.unsplash.com/premium_photo-1694475311493-87cd945765b1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[1]._id, // HarperCollins
         isbn: '9780062572233',
         publishedDate: new Date('2001-06-19'),
@@ -488,7 +488,7 @@ const seedDatabase = async () => {
       {
         title: 'Phenomenal Woman',
         author: createdAuthors[7]._id, // Maya Angelou
-        coverImage: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=400',
+        coverImage: 'https://plus.unsplash.com/premium_photo-1673716788773-4a8964fa26b9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8UGhlbm9tZW5hbCUyMHBpbmt8ZW58MHx8MHx8fDA%3D',
         publisher: createdPublishers[2]._id, // Simon & Schuster
         isbn: '9780679439240',
         publishedDate: new Date('1995-03-01'),
@@ -511,7 +511,7 @@ const seedDatabase = async () => {
       {
         title: 'The Battle of the Labyrinth',
         author: createdAuthors[8]._id, // Rick Riordan
-        coverImage: 'https://images.unsplash.com/photo-1604014238251-9d84ffdb4a7a?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1593296123604-d981e7dcc21a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[4]._id, // Scholastic
         isbn: '9781423101468',
         publishedDate: new Date('2008-05-06'),
@@ -541,7 +541,7 @@ const seedDatabase = async () => {
       {
         title: 'On Writing: A Memoir of the Craft',
         author: createdAuthors[2]._id, // Stephen King
-        coverImage: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1603696500532-36b050b0f1c1?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[1]._id, // HarperCollins
         isbn: '9780743455961',
         publishedDate: new Date('2000-10-03'),
@@ -564,7 +564,7 @@ const seedDatabase = async () => {
       {
         title: 'The Casual Vacancy',
         author: createdAuthors[0]._id, // J.K. Rowling
-        coverImage: 'https://images.unsplash.com/photo-1588774069203-1b06050bd3ff?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1668906903861-5e5087c37ed5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[0]._id, // Penguin Random House
         isbn: '9780316228534',
         publishedDate: new Date('2012-09-27'),
@@ -587,7 +587,7 @@ const seedDatabase = async () => {
       {
         title: 'Verity',
         author: createdAuthors[4]._id, // Colleen Hoover
-        coverImage: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1735794463942-9a4b4405b6b6?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[3]._id, // Hachette
         isbn: '9781791392796',
         publishedDate: new Date('2018-12-07'),
@@ -617,7 +617,7 @@ const seedDatabase = async () => {
       {
         title: 'And Then There Were None',
         author: createdAuthors[3]._id, // Agatha Christie
-        coverImage: 'https://images.unsplash.com/photo-1516972810927-80185027ca84?q=80&w=400',
+        coverImage: 'https://images.unsplash.com/photo-1654336945271-5f88ace80c85?q=80&w=1867&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         publisher: createdPublishers[0]._id, // Penguin Random House
         isbn: '9780062073488',
         publishedDate: new Date('1939-11-06'),
