@@ -79,7 +79,7 @@
         localStorage.setItem('user', JSON.stringify(res.user))
   
         // Redirect after login
-        router.push('/home')
+        router.push('/')
       } else {
         errorMsg.value = res.message || 'Login failed'
       }
