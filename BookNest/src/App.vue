@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/browse">Browse</router-link> |
+      <router-link to="/my-books">My Books</router-link> | <!-- Add new link -->
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link> |
       <router-link to="/admin">Admin</router-link>

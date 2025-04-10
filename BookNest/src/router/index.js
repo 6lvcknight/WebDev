@@ -5,6 +5,7 @@ import BookDetail from '../views/BookDetail.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import AdminDashboard from '../views/AdminDashboard.vue'
+import MyBooksView from '../views/MyBooksView.vue' // Import the new view
 
 import { isAuthenticated } from '../composables/useAuth.js' // adjust if alias used
 
@@ -14,7 +15,8 @@ const routes = [
   { path: '/book/:id', component: BookDetail },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
-  { path: '/admin', component: AdminDashboard }
+  { path: '/admin', component: AdminDashboard },
+  { path: '/my-books', component: MyBooksView } // Add the new route
 ]
 
 const router = createRouter({

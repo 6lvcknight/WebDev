@@ -16,7 +16,7 @@
           <div class="navbar-right">
             <div v-if="username" class="flex items-center gap-4">
               <span class="username-label">Logged in as {{ username }}</span>
-              <button @click="handleLogout" class="text-sm text-red-600 underline hover:text-red-800">Logout</button>
+              <button @click="handleLogout" class="navbar-link logout-link">Logout</button>
             </div>
           </div>
         </div>
@@ -144,10 +144,12 @@
     const router = useRouter()
     const username = ref('')
 
+    const user = ref(null)
+
     onMounted(() => {
-    const user = getUser()
-    if (user) {
-      username.value = user.username
+    user.value = getUser()
+    if (user.value) {
+      username.value = user.value.username
     }
   })
 
@@ -304,6 +306,15 @@
   .navbar-right {
     display: flex;
     align-items: center;
+  }
+
+  .logout-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
   }
 
   .users-icon {
