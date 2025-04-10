@@ -1,2 +1,3 @@
 Mankirat Mann (100878345) - Worked on AdminDashboard, Graphs (D3.js), Home, Navbar, Tweaked isses all around
 Folu Aderibigbe (100791511) - built the server api routes and the models. built the api calls in the frontend. created the script for the data and a test script to confirm the api routes were working as expected.
+Mohsin Qureshi (100875639) - Implemented the "My Books" page with borrowed books and wishlist functionality, and fixed some UI consistency
