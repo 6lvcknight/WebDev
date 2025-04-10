@@ -3,3 +3,4 @@ Folu Aderibigbe (100791511) - built the server api routes and the models. built 
 Mohsin Qureshi (100875639) - Implemented the "My Books" page with borrowed books and wishlist functionality, and fixed some UI consistency.
 Ayaan Yousaf (100864679) - Connected Browse page to API to fetch book data, wrote scripts for populating database, improved consistency and fixed some bugs in the frontend.
 Bisayo Awude (100871551) - Worked on the footers page (About, Blog, Contact, Privacy and Terms).
+Ali Shamsi (100874194) - Worked on all of frontend, Login Functionality, Contributed to backend decent amount, set up DB and help implement. Authentication for Strict Access to Login and Register. Helped Lead the team. Made the framework for the project.
