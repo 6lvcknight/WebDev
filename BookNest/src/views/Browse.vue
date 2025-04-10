@@ -186,11 +186,11 @@
       <footer class="footer">
         <div class="footer-container">
           <nav class="footer-nav">
-            <a href="#" class="footer-link">About</a>
-            <a href="#" class="footer-link">Blog</a>
-            <a href="#" class="footer-link">Contact</a>
-            <a href="#" class="footer-link">Terms</a>
-            <a href="#" class="footer-link">Privacy</a>
+            <router-link to="/about" class="footer-link">About</router-link>
+            <router-link to="/blog" class="footer-link">Blog</router-link>
+            <router-link to="/contact" class="footer-link">Contact</router-link>
+            <router-link to="/terms" class="footer-link">Terms</router-link>
+            <router-link to="/privacy" class="footer-link">Privacy</router-link>
           </nav>
           <p class="copyright">&copy; 2025 BookNest. All rights reserved.</p>
         </div>
