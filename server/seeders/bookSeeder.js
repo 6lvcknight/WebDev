@@ -107,9 +107,6 @@ const seedDatabase = async () => {
       }
       createdUsers.push(user);
     }
-    
-    // Reference to first user for reviews
-    const reviewUser = createdUsers[0];
 
     // Create books
     const books = [
@@ -126,13 +123,49 @@ const seedDatabase = async () => {
         language: 'English',
         pages: 223,
         reviews: [{
-          userId: reviewUser._id,
+          userId: createdUsers[0]._id,
           rating: 5,
           title: 'A magical beginning',
           content: 'This book started my love for reading. The world-building is incredible.',
           helpful: 24,
-        }],
-        reviewsCount: 1
+        },
+        {
+          userId: createdUsers[2]._id,
+          rating: 4,
+          title: 'Unexpectedly gripping',
+          content: 'Didn’t expect to enjoy it this much. The pacing and details kept me hooked!',
+          helpful: 17,
+        },
+        {
+          userId: createdUsers[1]._id,
+          rating: 3,
+          title: 'Good but slow',
+          content: 'The plot was decent, but it dragged in the middle.',
+          helpful: 9
+        },
+        {
+          userId: createdUsers[2]._id,
+          rating: 4,
+          title: 'Loved the characters',
+          content: 'The characters felt so real and relatable.',
+          helpful: 14
+        },
+        {
+          userId: createdUsers[1]._id,
+          rating: 5,
+          title: 'A must-read',
+          content: 'One of the best books I’ve read this year!',
+          helpful: 33
+        },
+        {
+          userId: createdUsers[0]._id,
+          rating: 2,
+          title: 'Not my style',
+          content: 'Too confusing for me. The story was all over the place.',
+          helpful: 6
+        },
+      ],
+        reviewsCount: 6
       },
       {
         title: 'A Game of Thrones',
@@ -147,13 +180,35 @@ const seedDatabase = async () => {
         language: 'English',
         pages: 694,
         reviews: [{
-          userId: reviewUser._id,
+          userId: createdUsers[0]._id,
           rating: 4,
           title: 'Epic but violent',
           content: 'Complex characters and intricate plot. Not for the faint-hearted.',
           helpful: 18,
-        }],
-        reviewsCount: 1
+        },
+        {
+          userId: createdUsers[2]._id,
+          rating: 4,
+          title: 'Engaging and clever',
+          content: 'Loved the plot twists and the writing style.',
+          helpful: 18
+        },
+        {
+          userId: createdUsers[1]._id,
+          rating: 5,
+          title: 'Inspirational',
+          content: 'Made me cry and reflect. Beautifully written.',
+          helpful: 26
+        },
+        {
+          userId: createdUsers[0]._id,
+          rating: 3,
+          title: 'Decent read',
+          content: 'Enjoyable but not super memorable.',
+          helpful: 11
+        }
+        ],
+        reviewsCount: 4
       },
       {
         title: 'The Shining',
@@ -167,8 +222,23 @@ const seedDatabase = async () => {
         availableCopies: 20,
         language: 'English',
         pages: 447,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[2]._id,
+            rating: 4,
+            title: 'Creative concept',
+            content: 'The world-building and premise were amazing.',
+            helpful: 19
+          },
+          {
+            userId: createdUsers[0]._id,
+            rating: 5,
+            title: 'Thrilling till the end',
+            content: 'Had me guessing the whole time. Loved it.',
+            helpful: 22
+          },
+        ],
+        reviewsCount: 2
       },
       {
         title: 'Murder on the Orient Express',
@@ -183,7 +253,7 @@ const seedDatabase = async () => {
         language: 'English',
         pages: 256,
         reviews: [{
-          userId: reviewUser._id,
+          userId: createdUsers[2]._id,
           rating: 5,
           title: 'A perfect mystery',
           content: 'One of Christie\'s best works with an incredible twist ending.',
@@ -203,8 +273,37 @@ const seedDatabase = async () => {
         availableCopies: 45,
         language: 'English',
         pages: 384,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[1]._id,
+            rating: 4,
+            title: 'Powerful themes',
+            content: 'Deals with heavy topics gracefully and intelligently.',
+            helpful: 15
+          },
+          {
+            userId: createdUsers[2]._id,
+            rating: 3,
+            title: 'Bit underwhelming',
+            content: 'Expected more from the ending. Still solid though.',
+            helpful: 8
+          },
+          {
+            userId: createdUsers[1]._id,
+            rating: 5,
+            title: 'Phenomenal!',
+            content: 'Couldn’t stop thinking about it even after finishing.',
+            helpful: 29
+          },
+          {
+            userId: createdUsers[0]._id,
+            rating: 2,
+            title: 'Disappointed',
+            content: 'The hype didn’t match the experience for me.',
+            helpful: 5
+          }
+        ],
+        reviewsCount: 4
       },
       {
         title: 'The Handmaid\'s Tale',
@@ -218,8 +317,37 @@ const seedDatabase = async () => {
         availableCopies: 40,
         language: 'English',
         pages: 311,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[2]._id,
+            rating: 4,
+            title: 'Heartfelt and honest',
+            content: 'A touching story that resonated deeply.',
+            helpful: 16
+          },
+          {
+            userId: createdUsers[1]._id,
+            rating: 3,
+            title: 'Unique perspective',
+            content: 'Interesting premise but needed more depth.',
+            helpful: 12
+          },
+          {
+            userId: createdUsers[0]._id,
+            rating: 5,
+            title: 'Mind-blowing',
+            content: 'One twist after another! Amazing storytelling.',
+            helpful: 31
+          },
+          {
+            userId: createdUsers[2]._id,
+            rating: 4,
+            title: 'Nailed the vibe',
+            content: 'Exactly what I wanted out of this genre.',
+            helpful: 17
+          }
+        ],
+        reviewsCount: 4
       },
       {
         title: 'Coraline',
@@ -233,8 +361,23 @@ const seedDatabase = async () => {
         availableCopies: 30,
         language: 'English',
         pages: 162,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[1]._id,
+            rating: 4,
+            title: 'Smart and stylish',
+            content: 'A fun, clever ride from start to finish.',
+            helpful: 20
+          },
+          {
+            userId: createdUsers[0]._id,
+            rating: 5,
+            title: 'Pure magic',
+            content: 'Everything about this book was enchanting.',
+            helpful: 34
+          }
+        ],
+        reviewsCount: 2
       },
       {
         title: 'I Know Why the Caged Bird Sings',
@@ -248,8 +391,16 @@ const seedDatabase = async () => {
         availableCopies: 25,
         language: 'English',
         pages: 304,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[1]._id,
+            rating: 5,
+            title: 'Powerful and emotional',
+            content: 'Every page speaks volumes. A truly empowering story.',
+            helpful: 22
+          }
+        ],
+        reviewsCount: 1
       },
       {
         title: 'The Lightning Thief',
@@ -263,8 +414,23 @@ const seedDatabase = async () => {
         availableCopies: 60,
         language: 'English',
         pages: 377,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[0]._id,
+            rating: 5,
+            title: 'Absolutely thrilling!',
+            content: 'Loved the mythology and fast-paced plot. Great for young readers.',
+            helpful: 19
+          },
+          {
+            userId: createdUsers[2]._id,
+            rating: 4,
+            title: 'Fun adventure',
+            content: 'It had great moments and funny scenes. Some parts were predictable.',
+            helpful: 12
+          }
+        ],
+        reviewsCount: 2
       },
       {
         title: 'The Testaments',
@@ -278,8 +444,16 @@ const seedDatabase = async () => {
         availableCopies: 38,
         language: 'English',
         pages: 419,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[1]._id,
+            rating: 4,
+            title: 'Solid follow-up',
+            content: 'Not quite as haunting as the first but still a strong narrative.',
+            helpful: 14
+          }
+        ],
+        reviewsCount: 1
       },
       {
         title: 'American Gods',
@@ -293,8 +467,23 @@ const seedDatabase = async () => {
         availableCopies: 50,
         language: 'English',
         pages: 465,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[2]._id,
+            rating: 5,
+            title: 'Wild and imaginative',
+            content: 'This book blew my mind. It’s deep, weird, and amazing.',
+            helpful: 27
+          },
+          {
+            userId: createdUsers[0]._id,
+            rating: 4,
+            title: 'Mythology meets mystery',
+            content: 'It takes some patience, but it’s so worth it.',
+            helpful: 18
+          }
+        ],
+        reviewsCount: 2
       },
       {
         title: 'Phenomenal Woman',
@@ -308,8 +497,16 @@ const seedDatabase = async () => {
         availableCopies: 28,
         language: 'English',
         pages: 128,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[0]._id,
+            rating: 5,
+            title: 'Uplifting and bold',
+            content: 'Every poem hit hard. Angelou’s voice is unmatched.',
+            helpful: 25
+          }
+        ],
+        reviewsCount: 1
       },
       {
         title: 'The Battle of the Labyrinth',
@@ -323,8 +520,23 @@ const seedDatabase = async () => {
         availableCopies: 70,
         language: 'English',
         pages: 361,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[1]._id,
+            rating: 4,
+            title: 'Great addition to the series',
+            content: 'A little darker than the others but still really good.',
+            helpful: 15
+          },
+          {
+            userId: createdUsers[2]._id,
+            rating: 5,
+            title: 'Percy Jackson delivers again!',
+            content: 'Monsters, gods, and mazes—what’s not to love?',
+            helpful: 30
+          }
+        ],
+        reviewsCount: 2
       },
       {
         title: 'On Writing: A Memoir of the Craft',
@@ -338,8 +550,16 @@ const seedDatabase = async () => {
         availableCopies: 33,
         language: 'English',
         pages: 288,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[0]._id,
+            rating: 5,
+            title: 'For writers and readers alike',
+            content: 'Half memoir, half writing manual. Both parts are fantastic.',
+            helpful: 23
+          }
+        ],
+        reviewsCount: 1
       },
       {
         title: 'The Casual Vacancy',
@@ -353,8 +573,16 @@ const seedDatabase = async () => {
         availableCopies: 42,
         language: 'English',
         pages: 503,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[2]._id,
+            rating: 3,
+            title: 'Dark and slow',
+            content: 'Interesting characters, but it took a while to get into.',
+            helpful: 10
+          }
+        ],
+        reviewsCount: 1
       },
       {
         title: 'Verity',
@@ -368,8 +596,23 @@ const seedDatabase = async () => {
         availableCopies: 36,
         language: 'English',
         pages: 314,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[1]._id,
+            rating: 5,
+            title: 'Chilling and intense',
+            content: 'One of the most shocking endings I’ve read.',
+            helpful: 28
+          },
+          {
+            userId: createdUsers[0]._id,
+            rating: 4,
+            title: 'Twisted and compelling',
+            content: 'Couldn’t look away. So disturbing but so good.',
+            helpful: 19
+          }
+        ],
+        reviewsCount: 2
       },
       {
         title: 'And Then There Were None',
@@ -383,8 +626,16 @@ const seedDatabase = async () => {
         availableCopies: 30,
         language: 'English',
         pages: 264,
-        reviews: [],
-        reviewsCount: 0
+        reviews: [
+          {
+            userId: createdUsers[2]._id,
+            rating: 5,
+            title: 'Masterful mystery',
+            content: 'Classic whodunit. The ending caught me completely off guard.',
+            helpful: 32
+          }
+        ],
+        reviewsCount: 1
       }
     ];
     
