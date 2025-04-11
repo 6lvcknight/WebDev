@@ -137,6 +137,7 @@
     import { onMounted, ref } from 'vue'
     import { useRouter } from 'vue-router'
     import { getUser, logout } from '../composables/useAuth'
+    import axios from 'axios'
 
     const router = useRouter()
     const username = ref('')
@@ -158,36 +159,86 @@
 
 
   // Sample data for featured books
-  const featuredBooks = ref([
-    {
-      id: 1,
-      title: 'The Midnight Library',
-      author: 'Matt Haig',
-      coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4.5
-    },
-    {
-      id: 2,
-      title: 'Klara and the Sun',
-      author: 'Kazuo Ishiguro',
-      coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4
-    },
-    {
-      id: 3,
-      title: 'Project Hail Mary',
-      author: 'Andy Weir',
-      coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 5
-    },
-    {
-      id: 4,
-      title: 'The Four Winds',
-      author: 'Kristin Hannah',
-      coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      rating: 4
-    }
-  ]);
+  const recentBooks = ref([]);
+  const featuredBooks = ref([]);
+  const loadingRecentBooks = ref(true);
+  const recentBooksError = ref(null);
+  const loadingFeaturedBooks = ref(true);
+  const featuredBooksError = ref(null);
+
+  const fetchFeaturedBooks = async () => {
+  try {
+    loadingFeaturedBooks.value = true;
+    featuredBooksError.value = null;
+    
+    const response = await axios.get('http://localhost:3000/api/library/books/featured');
+    
+    featuredBooks.value = response.data.map(book => ({
+      _id: book._id, // Use MongoDB _id for routing
+      title: book.title || 'Untitled Book',
+      author: book.author?.name || (typeof book.author === 'string' ? 'Unknown Author' : book.author?.name || 'Unknown Author'),
+      coverImage: book.coverImage || 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      rating: calculateRating(book.reviews)
+    }));
+    
+    loadingFeaturedBooks.value = false;
+  } catch (error) {
+    console.error('Error fetching featured books:', error);
+    featuredBooksError.value = 'Failed to load featured books';
+    loadingFeaturedBooks.value = false;
+  }
+};
+
+// Add helper function to calculate rating
+const calculateRating = (reviews) => {
+  if (!reviews || reviews.length === 0) return 0;
+  
+  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+  return (totalRating / reviews.length).toFixed(1);
+};
+
+  const fetchRecentBooks = async () => {
+  try {
+    loadingRecentBooks.value = true;
+    recentBooksError.value = null;
+    
+    const response = await axios.get('http://localhost:3000/api/library/books/recent');
+    recentBooks.value = response.data.map(book => ({
+      _id: book._id, // Use MongoDB _id for routing
+      title: book.title || 'Untitled Book',
+      author: book.author?.name || (typeof book.author === 'string' ? 'Unknown Author' : book.author?.name || 'Unknown Author'),
+      coverImage: book.coverImage || 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      addedDate: formatDate(book.createdAt)
+    }));
+    
+    loadingRecentBooks.value = false;
+  } catch (error) {
+    console.error('Error fetching recent books:', error);
+    recentBooksError.value = 'Failed to load recent books';
+    loadingRecentBooks.value = false;
+  }
+};
+
+// Helper function to format dates
+const formatDate = (dateString) => {
+  if (!dateString) return 'Recently';
+  
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffTime = Math.abs(now - date);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) return 'Today';
+  if (diffDays === 1) return 'Yesterday';
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric'
+  });
+};
 
   // Sample data for categories
   const categories = ref([
@@ -199,37 +250,19 @@
     { id: 6, name: 'Fantasy', count: 512, icon: 'SparklesIcon' }
   ]);
 
-  // Sample data for recent books
-  const recentBooks = ref([
-    {
-      id: 5,
-      title: 'The Invisible Life of Addie LaRue',
-      author: 'V.E. Schwab',
-      coverImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      addedDate: '2 days ago'
-    },
-    {
-      id: 6,
-      title: 'The Vanishing Half',
-      author: 'Brit Bennett',
-      coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      addedDate: '3 days ago'
-    },
-    {
-      id: 7,
-      title: 'Hamnet',
-      author: 'Maggie O\'Farrell',
-      coverImage: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      addedDate: '5 days ago'
-    },
-    {
-      id: 8,
-      title: 'The Guest List',
-      author: 'Lucy Foley',
-      coverImage: 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      addedDate: '1 week ago'
+
+  // Update the onMounted hook to fetch data
+  onMounted(() => {
+    // Existing code for user authentication
+    user.value = getUser()
+    if (user.value) {
+      username.value = user.value.username
     }
-  ]);
+    
+    // Add the call to fetch recent books
+    fetchRecentBooks();
+    fetchFeaturedBooks();
+  });
   </script>
 
 
